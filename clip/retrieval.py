@@ -11,13 +11,13 @@ import streamlit as st
 import pickle
 
 def load_embedding():
-  current_dir = os.path.dirname(os.path.abspath(__file__))
-  npy_folder = os.path.join(current_dir, "../embeding")
-  npy_file_path = os.path.join(npy_folder, "image_embeddings.npy")
+#   current_dir = os.path.dirname(os.path.abspath(__file__))
+#   npy_folder = os.path.join(current_dir, "../embeding")
+#   npy_file_path = os.path.join(npy_folder, "image_embeddings.npy")
 
-  embeddings = np.load(npy_file_path)
+  embeddings = np.load("/kaggle/input/bogia-embedding/image_embeddings.npy")
   model = SentenceTransformer('clip-ViT-B-32')
-  image_path = "/content/drive/MyDrive/colab/cs336/data/avengre"
+  image_path = "/kaggle/input/bogia-data"
   image_files = glob (os.path.join(image_path, "*.png"))
   return embeddings, model, image_path,image_files
 st.cache_resource
