@@ -15,8 +15,4 @@ def get_trans():
     return load_model()
 
 def trans_qrt(query, model, tokenizer):
-    tokenizer.src_lang = "vi"
-    encoded = tokenizer(query, return_tensors="pt")
-    generated_tokens = model.generate(**encoded, forced_bos_token_id=tokenizer.lang_code_to_id["en"])
-    translation = tokenizer.decode(generated_tokens[0], skip_special_tokens=True)
-    return translation
+    return 
