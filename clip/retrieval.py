@@ -53,7 +53,7 @@ def visualize_results(query, distances, retrieved_images):
   # Hiển thị query
   st.subheader("Query:")
   if isinstance(query, Image.Image):  # Nếu là ảnh
-      st.image(query, caption="Query Image", use_column_width=True)
+      st.image(query, caption="Query Image", use_container_width=True)
   else:  # Nếu là văn bản
       st.markdown(f"**Query Text:** `{query}`")
 
