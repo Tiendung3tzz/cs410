@@ -10,7 +10,7 @@ Woman = ['Thu Trang','Diệu Linh']
 st.title("Vietnamese Named Entity Recognition (NER)")
 model_trans, tokenizer = get_trans()
 nlp = get_nlp_pipeline()
-loaded_embeddings, model_clip, image_path,image_files = get_clip()
+embeddings, model_clip, image_path,image_files = get_clip()
 # Input text from user
 query = st.text_input("Nhập câu cần phân tích NER:", "")
 # Process input and display results
@@ -25,7 +25,7 @@ if st.button("Phân tích"):
         st.write("Kết quả phân tích:")
         st.write(updated_query)
         st.write(trans_results)
-        main_clip(query, loaded_embeddings, model_clip, image_path,image_files)
+        main_clip(query, embeddings, model_clip, image_path,image_files)
         
 
     else:
