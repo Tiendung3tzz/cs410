@@ -53,18 +53,16 @@ def visualize_results(query, distances, retrieved_images):
   # Hiển thị query
   st.subheader("Query:")
   if isinstance(query, Image.Image):  # Nếu là ảnh
-      st.image(query, caption="Query Image", use_container_width=True)
+      st.image(query, caption="Query Image", use_column_width=True)
   else:  # Nếu là văn bản
       st.markdown(f"**Query Text:** `{query}`")
 
   # Hiển thị các ảnh khớp kèm khoảng cách
   st.subheader("Kết quả khớp:")
-  cols = st.columns(len(retrieved_images))  # Tạo các cột để hiển thị ảnh
-  for col, img_path, distance in zip(cols, retrieved_images, distances):
-      with col:
-          # Hiển thị ảnh
-          img = Image.open(img_path)
-          st.image(img, caption=f"Dist: {distance:.2f}", use_container_width=True)
+  for i, (img_path, distance) in enumerate(zip(retrieved_images, distances)):
+      with st.container():
+        st.image(Image.open(img_path), caption=f"Match {i + 1} (Distance: {distance:.2f})", use_column_width=True)
+
 def main_clip(query, loaded_embeddings, model, image_path,image_files):
   index = fass_index(loaded_embeddings)
   distances, retrieved_image_files = search_image(query, model, index, image_files)
