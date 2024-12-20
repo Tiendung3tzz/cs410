@@ -16,11 +16,12 @@ updated_query = ""
 if st.button("Phân tích"):
     if query.strip():
         with st.spinner("Đang phân tích..."):
-            # ent_results = name_entity(query, nlp)
-            trans_results = trans_qrt(query, model, tokenizer)
-            # updated_query = replace_named_entities(query, ent_results, Men, Woman)
+            ent_results = name_entity(query, nlp)
+            updated_query = replace_named_entities(query, ent_results, Men, Woman)
+            trans_results = trans_qrt(updated_query, model, tokenizer)
         st.success("Phân tích hoàn tất!")
         st.write("Kết quả phân tích:")
+        st.write(updated_query)
         st.write(trans_results)
         # if st.button("dịch"):
         #         st.write(updated_query)                
