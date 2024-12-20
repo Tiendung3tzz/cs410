@@ -17,7 +17,7 @@ def load_embedding():
 
   embeddings = np.load("/kaggle/input/bogia-embedding/image_embeddings.npy")
   model = SentenceTransformer('clip-ViT-B-32')
-  image_path = "/kaggle/input/bogia-data"
+  image_path = "/kaggle/input/bogia-data/avengre"
   image_files = glob (os.path.join(image_path, "*.png"))
   return embeddings, model, image_path,image_files
 st.cache_resource
