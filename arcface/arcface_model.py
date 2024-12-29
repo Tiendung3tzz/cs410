@@ -23,7 +23,7 @@ def normalize_to_range(arr):
 def load_model():
     model = models.resnet50(pretrained=True)  # Vẫn dùng ResNet-50
     model.fc = nn.Linear(model.fc.in_features, NUM_CLASSES)  # Đảm bảo fully connected layer khớp với số lớp
-    model.load_state_dict(torch.load("/kaggle/input/bogia-embedding/image_embeddings.npy"))  # Tải lại các tham số đã huấn luyện
+    model.load_state_dict(torch.load("/kaggle/input/bogia-embedding/arcface_finetuned.pth"))  # Tải lại các tham số đã huấn luyện
     model = model.to(DEVICE)  # Chuyển mô hình về device (GPU hoặc CPU)
     model.eval()  
     return model
