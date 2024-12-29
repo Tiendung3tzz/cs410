@@ -13,7 +13,7 @@ EPOCHS = 20
 LEARNING_RATE = 0.001
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 Name = ["Trấn Thành","Lê Giang", "Tuấn Trần", "Uyển Ân"]
-font = ImageFont.truetype("arial.ttf", size=25)
+font = ImageFont.truetype("/kaggle/input/font-time/TIMES.TTF", size=25)
 
 def normalize_to_range(arr):
     min_val = np.min(arr)
