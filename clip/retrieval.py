@@ -62,7 +62,7 @@ def visualize_results(query, distances, retrieved_images,key=0):
     colss = 1
     if key==0:
        colss = len(retrieved_images)
-    num_columns = min(3, len(retrieved_images))  # Số cột tối đa trên một dòng
+    num_columns = min(3, colss)  # Số cột tối đa trên một dòng
     cols = st.columns(num_columns)
     if key==1:
       st.image(retrieved_images, caption=f"(Distance: {distances:.2f})", use_container_width=True)
