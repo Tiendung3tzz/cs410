@@ -5,7 +5,7 @@ from torch.utils.data import DataLoader
 from torchvision import datasets, transforms, models
 import numpy as np
 from arcface.mtcnn import *
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFont
 
 NUM_CLASSES = 4         # Số lớp (tương ứng với số thư mục)
 BATCH_SIZE = 32
@@ -13,6 +13,7 @@ EPOCHS = 20
 LEARNING_RATE = 0.001
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 Name = ["Trấn Thành","Lê Giang", "Tuấn Trần", "Uyển Ân"]
+font = ImageFont.truetype("arial.ttf", size=25)
 
 def normalize_to_range(arr):
     min_val = np.min(arr)
@@ -103,10 +104,11 @@ def arcface_run(retrieved_image_files,mtcnn,model,distances,ent_results,thresod)
                             conf = confidence_score
                 # Draw bounding box and label on the image
                 draw.rectangle([x_min, y_min, x_max, y_max], outline="green", width=3)
-                draw.text((x_min, y_min - 10), f"ID: {Name[predicted_label]} {confidence_score} ", fill="red")
+                draw.text((x_min, y_min - 15), f"ID: {predicted_label} {confidence_score} ", fill="red")
             
             # Save and show the annotated image
             annotated_image.save(output_image_path)
         conf = 0
         j+=1
-    return max_distance(normalized_array), normalized_array
+    img_final = f"/kaggle/working/cs410/output/output_{max_distance(normalized_array)}.jpg"
+    return max_distance(normalized_array), img_final
