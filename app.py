@@ -5,8 +5,8 @@ from clip.retrieval import *
 from arcface.arcface_model import *
 import streamlit as st
 
-Men = ['Trấn Thành', 'Bảo Lâm']
-Woman = ['Thu Trang','Diệu Linh']
+Men = ['Trấn Thành', 'Tuấn Trần']
+Woman = ['Thu Trang','Diệu Linh','Ngọc Giàu','Lê Giang', 'Uyển Ân','Hariwon']
 
 st.title("Vietnamese Named Entity Recognition (NER)")
 model_trans, tokenizer = get_trans()
