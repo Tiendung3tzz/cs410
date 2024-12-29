@@ -58,7 +58,7 @@ def arcface_run(retrieved_image_files,mtcnn,model,distances,ent_results,thresod)
         
         # Input and output paths
         input_image_path = image_test
-        output_image_path = f"/kaggle/working/cs410/output/output + {j}.jpg"
+        output_image_path = f"/kaggle/working/cs410/output/output_{j}.jpg"
         
         # Load image
         image = Image.open(input_image_path).convert("RGB")
@@ -102,8 +102,8 @@ def arcface_run(retrieved_image_files,mtcnn,model,distances,ent_results,thresod)
                             print(normalized_array[j],'conf:',conf,'confidence_score:',confidence_score,'label:',predicted_label)
                             conf = confidence_score
                 # Draw bounding box and label on the image
-                draw.rectangle([x_min, y_min, x_max, y_max], outline="red", width=3)
-                draw.text((x_min, y_min - 10), f"ID: {confidence_score}", fill="red")
+                draw.rectangle([x_min, y_min, x_max, y_max], outline="green", width=3)
+                draw.text((x_min, y_min - 10), f"ID: {Name[predicted_label]} {confidence_score} ", fill="red")
             
             # Save and show the annotated image
             annotated_image.save(output_image_path)
