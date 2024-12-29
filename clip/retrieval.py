@@ -73,7 +73,7 @@ def visualize_results(query, distances, retrieved_images,key=0):
               st.image(Image.open(img_path), caption=f"Match {i + 1} (Distance: {distance:.2f})", use_container_width=True)
 
 
-def main_clip(query, loaded_embeddings, model, image_path,image_files):
+def main_clip(query, loaded_embeddings, model, image_path,image_files,top_k):
   index = fass_index(loaded_embeddings)
-  distances, retrieved_image_files = search_image(query, model, index, image_files)
+  distances, retrieved_image_files = search_image(query, model, index, image_files,top_k)
   return distances, retrieved_image_files

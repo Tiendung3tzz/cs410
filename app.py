@@ -22,6 +22,13 @@ threshod = st.slider(
     value=70,  # Giá trị mặc định
     step=1     # Bước tăng/giảm
 )
+top_k = st.slider(
+    label="top_k",
+    min_value=1,
+    max_value=10,
+    value=5,  # Giá trị mặc định
+    step=1     # Bước tăng/giảm
+)
 threshod = threshod/100
 # Process input and display results
 updated_query = ""
@@ -35,7 +42,7 @@ if st.button("Phân tích"):
         st.write("Kết quả phân tích:")
         st.write(updated_query)
         st.write(trans_results)
-        distances, retrieved_image_files = main_clip(trans_results, embeddings, model_clip, image_path,image_files)
+        distances, retrieved_image_files = main_clip(trans_results, embeddings, model_clip, image_path,image_files,top_k)
         visualize_results(trans_results, distances, retrieved_image_files)
         max_index, normalized_array,img_final = arcface_run(retrieved_image_files,mtcnn,model_arcface,distances,ent_results,threshod)
         st.write(normalized_array,max_index)
