@@ -47,7 +47,7 @@ def search_image(query, model, index, image_files, top_k=5):
   return distances[0], retrieved_image_files  # Trả về cả khoảng cách và ảnh khớp
 
 # Visualize retrieved_image_files
-def visualize_results(query, distances, retrieved_images):
+def visualize_results(query, distances, retrieved_images,key=0):
     st.title("Kết quả tìm kiếm")
 
     # Hiển thị query
@@ -61,7 +61,7 @@ def visualize_results(query, distances, retrieved_images):
     st.subheader("Kết quả khớp:")
     num_columns = min(3, len(retrieved_images))  # Số cột tối đa trên một dòng
     cols = st.columns(num_columns)
-    if len(distances)==1:
+    if key==1:
       st.image(Image.open(retrieved_images), caption=f"Match {i + 1} (Distance: {distances:.2f})", use_container_width=True)
     else:
       for i, (img_path, distance) in enumerate(zip(retrieved_images, distances)):
