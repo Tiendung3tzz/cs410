@@ -48,6 +48,7 @@ def arcface_run(retrieved_image_files,mtcnn,model,distances,ent_results,thresod)
     text_name = get_name_img(ent_results)
     j = 0
     conf = 0
+    annotated_images = []
     for image_test in retrieved_image_files:
     
     # Transform cho ArcFace
@@ -108,7 +109,7 @@ def arcface_run(retrieved_image_files,mtcnn,model,distances,ent_results,thresod)
             
             # Save and show the annotated image
             annotated_image.save(output_image_path)
+            annotated_images.append(annotated_image)
         conf = 0
         j+=1
-    img_final = f"/kaggle/working/cs410/output/output_{max_distance(normalized_array)}.jpg"
-    return max_distance(normalized_array), normalized_array,img_final
+    return max_distance(normalized_array), normalized_array,annotated_images[max_distance(normalized_array)]
