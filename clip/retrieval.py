@@ -59,7 +59,7 @@ def visualize_results(query, distances, retrieved_images):
 
     # Hiển thị các ảnh khớp kèm khoảng cách trên cùng một dòng
     st.subheader("Kết quả khớp:")
-    num_columns = min(5, len(retrieved_images))  # Số cột tối đa trên một dòng
+    num_columns = min(3, len(retrieved_images))  # Số cột tối đa trên một dòng
     cols = st.columns(num_columns)
 
     for i, (img_path, distance) in enumerate(zip(retrieved_images, distances)):
