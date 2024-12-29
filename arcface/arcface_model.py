@@ -108,7 +108,7 @@ def arcface_run(retrieved_image_files,mtcnn,model,distances,ent_results,thresod)
             
             # Save and show the annotated image
             annotated_image.save(output_image_path)
-            annotated_images.append(annotated_image)
+        annotated_images.append(annotated_image)
         conf = 0
         j+=1
     return max_distance(normalized_array), normalized_array,annotated_images[max_distance(normalized_array)]

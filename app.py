@@ -38,7 +38,7 @@ if st.button("Phân tích"):
         distances, retrieved_image_files = main_clip(trans_results, embeddings, model_clip, image_path,image_files)
         visualize_results(trans_results, distances, retrieved_image_files)
         max_index, normalized_array,img_final = arcface_run(retrieved_image_files,mtcnn,model_arcface,distances,ent_results,threshod)
-        st.write(normalized_array)
+        st.write(normalized_array,max_index)
         visualize_results(trans_results, normalized_array[max_index], img_final,1)
 
     else:
