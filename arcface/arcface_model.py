@@ -104,7 +104,7 @@ def arcface_run(retrieved_image_files,mtcnn,model,distances,ent_results,thresod)
                             conf = confidence_score
                 # Draw bounding box and label on the image
                 draw.rectangle([x_min, y_min, x_max, y_max], outline="green", width=3)
-                draw.text((x_min, y_min - 15), f"ID: {predicted_label} {confidence_score} ", fill="red")
+                draw.text((x_min, y_min - 15), f"ID: {predicted_label} {confidence_score} ", fill="red",font=font)
             
             # Save and show the annotated image
             annotated_image.save(output_image_path)
