@@ -4,5 +4,4 @@ openai
 sentencepiece 
 sentence-transformers
 faiss-gpu
-torch
-facenet_pytorch
+facenet_pytorch==2.6.0
