@@ -111,4 +111,4 @@ def arcface_run(retrieved_image_files,mtcnn,model,distances,ent_results,thresod)
         conf = 0
         j+=1
     img_final = f"/kaggle/working/cs410/output/output_{max_distance(normalized_array)}.jpg"
-    return max_distance(normalized_array), img_final
+    return max_distance(normalized_array), normalized_array,img_final
