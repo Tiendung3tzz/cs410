@@ -10,7 +10,7 @@ def replace_named_entities(query, results, men_list, woman_list):
 
         if word in men_list:
             if word in processed_words:
-                replacement = word  # Giữ nguyên nếu đã xử lý trước đó
+                replacement = "người đàn ông"  # Giữ nguyên nếu đã xử lý trước đó
             else:
                 replacement = "người đàn ông khác"
                 processed_words.add(word)
@@ -19,7 +19,7 @@ def replace_named_entities(query, results, men_list, woman_list):
 
         elif word in woman_list:
             if word in processed_words:
-                replacement = word  # Giữ nguyên nếu đã xử lý trước đó
+                replacement = "người phụ nữ"  # Giữ nguyên nếu đã xử lý trước đó
             else:
                 replacement = "người phụ nữ khác"
                 processed_words.add(word)

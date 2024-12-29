@@ -25,7 +25,8 @@ if st.button("Phân tích"):
         st.write("Kết quả phân tích:")
         st.write(updated_query)
         st.write(trans_results)
-        main_clip(trans_results, embeddings, model_clip, image_path,image_files)
+        distances, retrieved_image_files = main_clip(trans_results, embeddings, model_clip, image_path,image_files)
+        visualize_results(trans_results, distances, retrieved_image_files)
         
 
     else:

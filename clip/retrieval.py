@@ -66,5 +66,4 @@ def visualize_results(query, distances, retrieved_images):
 def main_clip(query, loaded_embeddings, model, image_path,image_files):
   index = fass_index(loaded_embeddings)
   distances, retrieved_image_files = search_image(query, model, index, image_files)
-  visualize_results(query, distances, retrieved_image_files)
-  return
+  return distances, retrieved_image_files
