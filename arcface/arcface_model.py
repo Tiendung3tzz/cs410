@@ -44,14 +44,13 @@ def max_distance(normalized_array):
 
 def arcface_run(retrieved_image_files,mtcnn,model,distances,ent_results,thresod):
     normalized_array = normalize_to_range(distances)
-    prename = set()
+    
     text_name = get_name_img(ent_results)
     j = 0
-    conf = 0
     annotated_images = []
     for image_test in retrieved_image_files:
-    
-    # Transform cho ArcFace
+        conf = 0    
+        prename = set()
         arcface_transform = transforms.Compose([
             transforms.Resize((112, 112)),
             transforms.ToTensor(),
@@ -95,12 +94,12 @@ def arcface_run(retrieved_image_files,mtcnn,model,distances,ent_results,thresod)
                         if (Name[predicted_label] not in prename):
                             prename.add(Name[predicted_label])
                             print(image_test)
-                            normalized_array[j]=normalized_array[j] + confidence_score;
+                            normalized_array[j]=normalized_array[j] + confidence_score
                             print(normalized_array[j],':',conf,':',predicted_label)
                             conf = confidence_score
                         elif (conf < confidence_score):
                             print(image_test)
-                            normalized_array[j]=normalized_array[j] + confidence_score - conf;
+                            normalized_array[j]=normalized_array[j] + confidence_score - conf
                             print(normalized_array[j],'conf:',conf,'confidence_score:',confidence_score,'label:',predicted_label)
                             conf = confidence_score
                 # Draw bounding box and label on the image
