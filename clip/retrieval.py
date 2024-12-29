@@ -61,11 +61,13 @@ def visualize_results(query, distances, retrieved_images):
     st.subheader("Kết quả khớp:")
     num_columns = min(3, len(retrieved_images))  # Số cột tối đa trên một dòng
     cols = st.columns(num_columns)
-
-    for i, (img_path, distance) in enumerate(zip(retrieved_images, distances)):
-        col = cols[i % num_columns]  # Lấy cột tương ứng
-        with col:
-            st.image(Image.open(img_path), caption=f"Match {i + 1} (Distance: {distance:.2f})", use_container_width=True)
+    if len(distances)==1:
+      st.image(Image.open(retrieved_images), caption=f"Match {i + 1} (Distance: {distances:.2f})", use_container_width=True)
+    else:
+      for i, (img_path, distance) in enumerate(zip(retrieved_images, distances)):
+          col = cols[i % num_columns]  # Lấy cột tương ứng
+          with col:
+              st.image(Image.open(img_path), caption=f"Match {i + 1} (Distance: {distance:.2f})", use_container_width=True)
 
 
 def main_clip(query, loaded_embeddings, model, image_path,image_files):
