@@ -13,7 +13,6 @@ EPOCHS = 20
 LEARNING_RATE = 0.001
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 Name = ["Trấn Thành","Lê Giang", "Tuấn Trần", "Uyển Ân"]
-conf = 0
 
 def normalize_to_range(arr):
     min_val = np.min(arr)
@@ -46,6 +45,8 @@ def arcface_run(retrieved_image_files,mtcnn,model,distances,ent_results,thresod)
     normalized_array = normalize_to_range(distances)
     prename = set()
     text_name = get_name_img(ent_results)
+    j = 0
+    conf = 0
     for image_test in retrieved_image_files:
     
     # Transform cho ArcFace

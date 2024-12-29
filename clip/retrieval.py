@@ -11,11 +11,11 @@ import streamlit as st
 import pickle
 
 def load_embedding():
-#   current_dir = os.path.dirname(os.path.abspath(__file__))
-#   npy_folder = os.path.join(current_dir, "../embeding")
-#   npy_file_path = os.path.join(npy_folder, "image_embeddings.npy")
+  # current_dir = os.path.dirname(os.path.abspath(__file__))
+  # npy_folder = os.path.join(current_dir, "../embeding")
+  # npy_file_path = os.path.join(npy_folder, "image_embeddings.npy")
 
-  embeddings = np.load("/kaggle/input/bogia-embedding/image_embeddings.npy")
+  embeddings = np.load('/kaggle/input/bogia-embedding/image_embeddings.npy')
   model = SentenceTransformer('clip-ViT-B-32')
   image_path = "/kaggle/input/bogia-data/avengre"
   image_files = glob (os.path.join(image_path, "*.png"))
@@ -40,7 +40,7 @@ def search_image(query, model, index, image_files, top_k=5):
 
   query_embedding = model.encode(query)
   query_embedding = query_embedding.astype("float32").reshape(1, -1)
-
+  print(query_embedding)
   distances, indices = index.search(query_embedding, top_k)
 
   retrieved_image_files = [image_files[i] for i in indices[0]]
@@ -48,20 +48,25 @@ def search_image(query, model, index, image_files, top_k=5):
 
 # Visualize retrieved_image_files
 def visualize_results(query, distances, retrieved_images):
-  st.title("Kết quả tìm kiếm")
+    st.title("Kết quả tìm kiếm")
 
-  # Hiển thị query
-  st.subheader("Query:")
-  if isinstance(query, Image.Image):  # Nếu là ảnh
-      st.image(query, caption="Query Image", use_container_width=True)
-  else:  # Nếu là văn bản
-      st.markdown(f"**Query Text:** `{query}`")
+    # Hiển thị query
+    st.subheader("Query:")
+    if isinstance(query, Image.Image):  # Nếu là ảnh
+        st.image(query, caption="Query Image", use_container_width=True)
+    else:  # Nếu là văn bản
+        st.markdown(f"**Query Text:** `{query}`")
 
-  # Hiển thị các ảnh khớp kèm khoảng cách
-  st.subheader("Kết quả khớp:")
-  for i, (img_path, distance) in enumerate(zip(retrieved_images, distances)):
-      with st.container():
-        st.image(Image.open(img_path), caption=f"Match {i + 1} (Distance: {distance:.2f})", use_column_width=True)
+    # Hiển thị các ảnh khớp kèm khoảng cách trên cùng một dòng
+    st.subheader("Kết quả khớp:")
+    num_columns = min(5, len(retrieved_images))  # Số cột tối đa trên một dòng
+    cols = st.columns(num_columns)
+
+    for i, (img_path, distance) in enumerate(zip(retrieved_images, distances)):
+        col = cols[i % num_columns]  # Lấy cột tương ứng
+        with col:
+            st.image(Image.open(img_path), caption=f"Match {i + 1} (Distance: {distance:.2f})", use_container_width=True)
+
 
 def main_clip(query, loaded_embeddings, model, image_path,image_files):
   index = fass_index(loaded_embeddings)
