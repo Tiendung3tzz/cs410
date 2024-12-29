@@ -59,10 +59,13 @@ def visualize_results(query, distances, retrieved_images,key=0):
 
     # Hiển thị các ảnh khớp kèm khoảng cách trên cùng một dòng
     st.subheader("Kết quả khớp:")
+    colss = 1
+    if key==0:
+       colss = len(retrieved_images)
     num_columns = min(3, len(retrieved_images))  # Số cột tối đa trên một dòng
     cols = st.columns(num_columns)
     if key==1:
-      st.image(Image.open(retrieved_images), caption=f"(Distance: {distances:.2f})", use_container_width=True)
+      st.image(retrieved_images, caption=f"(Distance: {distances:.2f})", use_container_width=True)
     else:
       for i, (img_path, distance) in enumerate(zip(retrieved_images, distances)):
           col = cols[i % num_columns]  # Lấy cột tương ứng
